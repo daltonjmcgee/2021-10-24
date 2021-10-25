@@ -1,0 +1,17 @@
+.directory {
+  background-color:aliceblue;
+  height: 100%;
+
+  &.style_1 {
+    position:relative;
+    z-index: 1;
+    &:after {
+      content: "";
+      position: absolute;
+      height: calc(100% + 5px);
+      width: 100%;
+      top: -5px;
+      box-shadow: 2px 0px 4px 0px;
+    }
+  }
+}

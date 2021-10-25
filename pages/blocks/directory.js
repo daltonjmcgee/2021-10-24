@@ -6,7 +6,7 @@
  * replaced with the name of the component.
  */
 
-import styles from '../../styles/Directory.module.scss'
+import styles from '../../styles/blocks/Directory.module.scss'
 
 export default function Directory() {
   return (

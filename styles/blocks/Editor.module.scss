@@ -1,0 +1,12 @@
+.editor {
+  background-color: aliceblue;
+  height: 100%;
+
+  &.style_1 {
+    position: relative;
+
+    .wrapper .row:first-of-type {
+      border: 1px solid black;
+    }
+  }
+}
