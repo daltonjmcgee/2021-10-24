@@ -1,5 +1,18 @@
 .block_builder {
   display:grid;
+
+  &.style_1 {
+    grid-template-columns: 7% 93%;
+
+    > * {
+      margin: 0 auto;
+      align-self: center;
+    }
+
+    p {
+      font-size: 1.25rem;
+    }
+  }
 }
 
 .row {
@@ -10,8 +23,4 @@
     font-size: 1.5rem;
     background-color: transparent;
   }
-}
-
-.header1 {
-  display:block;
 }

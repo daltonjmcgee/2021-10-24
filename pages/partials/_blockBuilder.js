@@ -7,10 +7,9 @@
  */
 
 import styles from '../../styles/partials/BlockBuilder.module.scss';
-import tempAPI from '../api/data';
-import { blockGenerator } from '../../inc/helpers';
-import { useState } from 'react';
-const { block_builder, row, col } = styles;
+import { blockGenerator, handleApi } from '../../inc/helpers';
+import React, { useState } from 'react';
+const { block_builder, row, col, style_1 } = styles;
 
 export default function BlockBuilder() {
   const blockTypes = [
@@ -21,29 +20,49 @@ export default function BlockBuilder() {
     "body",
   ];
   const [state, setState] = useState([]);
-  const [inputState, setInputState] = useState("");
+  const [inputState, setInputState] = useState({ type: "", value: "" });
+  const [_continue, _setContinue] = useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const newState = [...state];
+    newState.push(blockGenerator(inputState));
+    setState(newState);
+    setInputState({ type: "", value: "" });
+    _setContinue(false);
+  }
 
   function handleChange(e) {
-    const value = e.target.value
-    let newState = [...state];
-    setInputState(value);
-    blockTypes.map(el => {
-      if (el == value) {
-        newState.push(blockGenerator(value, state.length-1));
-        setInputState("");
+    const value = e.target.value;
+    let newState = { ...inputState };
+    if (!_continue) {
+      newState.type = value;
+    } else {
+      newState.value = value;
+    }
+    for (let str of blockTypes) {
+      if (str === value) {
+        _setContinue(true)
       }
-    })
-    setState([...newState]);
+    }
+    setInputState(newState);
   }
+
   return (
-    <div className={`${block_builder ? block_builder : "block_builder"} ${row}`}>
-      {state.map((el)=>el.getHtml())}
-      <input placeholder="Add new block..." value={inputState} list="blockList" onChange={handleChange} />
-      <datalist className={col} id="blockList">
+    <React.Fragment>
+    {state.map(el=>el.getHtml())}
+    <form className={`
+      ${block_builder ? block_builder : "block_builder"}
+      ${row}
+      ${_continue ? style_1 : ""}`}  onSubmit={handleSubmit}>
+      {_continue ? <p>{inputState.type}</p> : false}
+      <input placeholder="Choose block type..." value={!_continue ? inputState.type : inputState.value} list={!_continue ? "typeList" : ""} onChange={handleChange} />
+      {!_continue ? (<datalist className={col} id="typeList">
         {blockTypes.map((el, i) => {
-          return (<option value={el} key={i} />)
+          return (<option value={el} key={i + "datalist"} />)
         })}
-      </datalist>
-    </div>
+      </datalist>) : false}
+    </form>
+    </React.Fragment>
   )
 }

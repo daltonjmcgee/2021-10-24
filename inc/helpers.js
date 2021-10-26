@@ -1,13 +1,21 @@
 import styles from '../styles/partials/BlockBuilder.module.scss';
+import { GetStaticProps } from 'next';
 
-export function blockGenerator(type, index) {
+/**
+ *
+ * @param {string} type
+ * @param {number} index
+ * @returns {JSX.Element}
+ */
+export function blockGenerator(inputState, index) {
   let ret;
-  switch (type) {
+  const type = inputState.type;
+  switch (inputState.type) {
     case "header1":
       ret = {
         type,
         getHtml: ()=>{
-          return (<h1 className={styles.header1} key={index}>Header 1</h1>)
+          return (<h1 className={styles.header1} key={index}>{inputState.value}</h1>)
         },
       };
       break;
@@ -15,7 +23,7 @@ export function blockGenerator(type, index) {
       ret = {
         type,
         getHtml: ()=>{
-          return (<h2 className={styles.header2} key={index}>Header 2</h2>)
+          return (<h2 className={styles.header2} key={index}>{inputState.value}</h2>)
         },
       };
       break;
@@ -23,7 +31,7 @@ export function blockGenerator(type, index) {
       ret = {
         type,
         getHtml: ()=>{
-          return (<p className={styles.body} key={index}>This is a body</p>)
+          return (<p className={styles.body} key={index}>{inputState.value}</p>)
         },
       };
       break;

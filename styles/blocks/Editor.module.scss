@@ -2,6 +2,29 @@
   background-color: aliceblue;
   height: 100%;
 
+  h1, h2 {
+    margin: 0 0 0 1rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+
+    &:first-of-type {
+      margin-top: 2rem;
+    }
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    font-size: 1.25rem;
+    margin-left: 2rem;
+  }
+
   &.style_1 {
     position: relative;
 
