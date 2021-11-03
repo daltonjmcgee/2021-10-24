@@ -15,7 +15,6 @@ export default function BlockBuilder() {
   const blockTypes = [
     "header1",
     "header2",
-    "list",
     "image",
     "body",
   ];

@@ -35,6 +35,14 @@ export function blockGenerator(inputState, index) {
         },
       };
       break;
+    case "image":
+      ret = {
+        type,
+        getHtml: ()=>{
+          return (<img className={styles.body} key={index} src={inputState.value}/>)
+        },
+      };
+      break;
   }
   return ret;
 }
